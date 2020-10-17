@@ -1,30 +1,29 @@
 function interpretEmail(email) {
     //this will change the email into a readable format to process
-<<<<<<< HEAD
-    var txt = str;
-    var score = 0;
-    var phrase = "testing phrase";
-    var pos = txt.indexOf(phrase);
-
-    if(pos >= 0) {
-        score++;
-    }
-=======
     var strEmail = "";
-    return strEmail;
+    return score;
 }
 
 function toHash() {
     //hash given string
 }
 
-function calcuateScore() {
+function calcuateScore(email) {
     //calculate the score of all given words
+    var txt = email;
+    var score = 0;
+    var phrase = "testing phrase";
+    var pos = txt.indexOf(phrase);
+    if(pos >= 0) {
+        score++;
+    }
+    return score;
 }
 
 
 function findWord(email, words) {
     //Find the words with the body 
 
->>>>>>> ac2826edf0b58401f2aaca00f72e5f89e45dbbae
 }
+
+console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread fortnite minecraft i am dead inside woohoo"));
