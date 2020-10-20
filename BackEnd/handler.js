@@ -1,3 +1,6 @@
+import { connection } from "./connection";
+import { mysql, connect } from './connection.js'
+
 function interpretEmail(email) {
     //this will change the email into a readable format to process
     var strEmail = "";
