@@ -2,6 +2,7 @@ BacK End
     Find a way to input an email into the application
     Create a hash function to convert the words into a hash
     Improve the algorithm that searches for each secret phrase
+    Code connection to the database
 
 Front End
     Make a button 
