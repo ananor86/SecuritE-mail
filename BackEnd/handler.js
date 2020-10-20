@@ -1,3 +1,6 @@
+import { connection } from "./connection";
+import { mysql, connect } from './connection.js'
+
 function interpretEmail(email) {
     //this will change the email into a readable format to process
 
@@ -6,11 +9,12 @@ function interpretEmail(email) {
     return score;
 }
 
-function toHash() {
+function toHash(item) {
     //hash given string
+
 }
 
-function calcuateScore(email) {
+function calcuateScore(email, phrases) {
     //calculate the score of all given words
     var txt = email;
     var score = 0;
@@ -29,7 +33,11 @@ function findWord(email, words) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread fortnite minecraft i am dead inside woohoo"));
 =======
 console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread These are some test words woohoo"));
 >>>>>>> 3467222436bb254600cada356d9c6c3c54ca2400
+=======
+console.log(calcuateScore("3fdsafadsfsd testing phrase hello world banana bread These are some test words woohoo"));
+>>>>>>> e92750ce6fc2d70486c67712ce1f3e383ec0bb31
