@@ -3,6 +3,8 @@ import { mysql, connect } from './connection.js'
 
 function interpretEmail(email) {
     //this will change the email into a readable format to process
+
+    return strEmail;
     var strEmail = "";
     return score;
 }
@@ -30,4 +32,5 @@ function findWord(email, words) {
 
 }
 
-console.log(calcuateScore("3fdsafadsfsd testing phrase hello world banana bread These are some test words woohoo"));
+console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread fortnite minecraft i am dead inside woohoo"));
+
