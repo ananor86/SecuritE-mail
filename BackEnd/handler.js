@@ -28,4 +28,8 @@ function findWord(email, words) {
 
 }
 
+<<<<<<< HEAD
 console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread fortnite minecraft i am dead inside woohoo"));
+=======
+console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread These are some test words woohoo"));
+>>>>>>> 3467222436bb254600cada356d9c6c3c54ca2400
