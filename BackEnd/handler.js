@@ -26,4 +26,4 @@ function findWord(email, words) {
 
 }
 
-console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread fortnite minecraft i am dead inside woohoo"));
+console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread These are some test words woohoo"));
