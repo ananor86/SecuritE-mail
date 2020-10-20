@@ -8,8 +8,6 @@ var connection = mysql.createConnection({
 
 });
 
-export {mysql, connection}
-
 connection.connect(function(err) {
     if(err) {
         console.error('Database connection failed: ' + err.stack);
