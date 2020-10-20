@@ -4,11 +4,12 @@ function interpretEmail(email) {
     return score;
 }
 
-function toHash() {
+function toHash(item) {
     //hash given string
+
 }
 
-function calcuateScore(email) {
+function calcuateScore(email, phrases) {
     //calculate the score of all given words
     var txt = email;
     var score = 0;

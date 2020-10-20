@@ -1,0 +1,7 @@
+BacK End
+    Find a way to input an email into the application
+    Create a hash function to convert the words into a hash
+    Improve the algorithm that searches for each secret phrase
+
+Front End
+    Make a button 
