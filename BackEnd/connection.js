@@ -2,11 +2,11 @@ const mysql = require('mysql')
 
 //Creates a connection to the AWS mySQL database.
 var connection = mysql.createConnection({
-    host: "ec2-52-91-199-44.compute-1.amazonaws.com",
-    user: "SYSTEM_USER",
+    host: "localhost",
+    user: "testuser",
     password: "SecuritE-mail",
     port: "3306",
-    database: "phrases"
+    database: "securite-mail"
 
 });
 
@@ -17,4 +17,9 @@ connection.connect(function(err) {
         return;
     }
     console.log('Connected to database.')
-})
+    connection.query("SELECT phrase FROM phrases", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+      });
+});
+ 
