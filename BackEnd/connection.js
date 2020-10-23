@@ -5,7 +5,8 @@ var connection = mysql.createConnection({
     host: "localhost",
     user: "testuser",
     password: "SecuritE-mail",
-    port: "3306"
+    port: "3306",
+    database: "securite-mail"
 
 });
 
@@ -16,5 +17,9 @@ connection.connect(function(err) {
         return;
     }
     console.log('Connected to database.')
-})
+    connection.query("SELECT phrase FROM phrases", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+      });
+});
  
