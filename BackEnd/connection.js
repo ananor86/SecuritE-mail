@@ -19,7 +19,11 @@ connection.connect(function(err) {
     console.log('Connected to database.')
     connection.query("SELECT phrase FROM phrases", function (err, result, fields) {
         if (err) throw err;
-        console.log(result);
+        var phrases = [];
+        for(i = 0; i < result.length; i++) {
+            phrases[i] = result[i].phrase;
+            console.log("index " + i + " " + phrases[i])
+          }
       });
 });
  
