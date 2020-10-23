@@ -8,10 +8,8 @@
  */
 function interpretEmail(email) {
     //this will change the email into a readable format to process
-
+    var strEmail = email;
     return strEmail;
-    var strEmail = "";
-    return score;
 }
 
 /**
@@ -22,7 +20,8 @@ function interpretEmail(email) {
 function toHash(email) {
     //hash given string
     var plaintxt = interpretEmail(email);
-
+    var hashText = plaintxt;
+    return hashText
 }
 
 /**
@@ -33,6 +32,9 @@ function toHash(email) {
  */
 function calcuateScore(email, phrases) {
     //calculate the score of all given words
+
+    //txt is the hashed version of the readable email
+    //score is score, duh
     var txt = toHash(interpretEmail(email));
     var score = 0;
 
@@ -54,5 +56,6 @@ function findWord(email, words) {
 
 }
 
-//console.log(interpretEmail("3fdsafadsfsd testing phrase hello world banana bread fortnite minecraft i am dead inside woohoo"));
-
+var phrases = []
+var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missle flight. There is a missle there and a missle here. The Radar range seems to be be off but that is nothing we cannot handle. Therefore, we will no longer meander around and get to work. Ship Capability. Regards, Elon Musk";
+console.log(calcuateScore(emailtst, phrases))
