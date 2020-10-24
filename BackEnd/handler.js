@@ -51,11 +51,6 @@ function calcuateScore(email, phrases) {
 }
 
 
-function findWord(email, words) {
-    //Find the words with the body 
-
-}
-
 var phrases = []
 var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missle flight. There is a missle there and a missle here. The Radar range seems to be be off but that is nothing we cannot handle. Therefore, we will no longer meander around and get to work. Ship Capability. Regards, Elon Musk";
 console.log(calcuateScore(emailtst, phrases))
