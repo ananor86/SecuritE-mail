@@ -1,1 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+  xsi:type="MailApp">
+
+    <Hosts>
+        <Host Name="Mailbox" />
+    </Hosts>
+    <Requirements>
+    <!-- specifies set of APIs available to add-in -->
+        <Sets DefaultMinVersion="1.1">
+             <set Name="MailBox" MinVersion="1.1" />
+        </Sets>    
+    </Requirements>
+    <Resources>
+    <!-- local elements, i.e. name, image etc. -->
+    </Resources>
+    <!-- gives add-in read permissions -->
+    <Permissions>ReadItem</Permissions>
+
+     <!-- specifies apllication, types of controls, text, icons, and any associated functions -->
+    <VersionOverrides>
+
+</OfficeApp>
