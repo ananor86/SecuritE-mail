@@ -8,7 +8,7 @@
  */
 function interpretEmail(email) {
     //this will change the email into a readable format to process
-    var strEmail = email;
+    let strEmail = email;
     return strEmail;
 }
 
@@ -19,8 +19,8 @@ function interpretEmail(email) {
  */
 function toHash(email) {
     //hash given string
-    var plaintxt = interpretEmail(email);
-    var hashText = plaintxt;
+    let plaintxt = interpretEmail(email);
+    let hashText = plaintxt;
     return hashText
 }
 
@@ -35,13 +35,13 @@ function calcuateScore(email, phrases) {
 
     //txt is the hashed version of the readable email
     //score is score, duh
-    var txt = toHash(interpretEmail(email));
-    var score = 0;
+    let txt = toHash(interpretEmail(email));
+    let score = 0;
 
     //for each phrase inside the array
     //find an occurence and update the score
     for(i = 0; i < phrases.length; i++) {
-        var pos = txt.indexOf(phrases[i]);
+        let pos = txt.indexOf(phrases[i]);
         if(pos >= 0) {
             score++;
         }
