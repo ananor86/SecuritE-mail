@@ -1,0 +1,25 @@
+{
+  "name": "securite-mail",
+  "version": "1.0.0",
+  "description": "e-mail scanner project",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "node-ssh": "^11.1.1",
+    "ssh2": "^0.8.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ananor86/SecuritE-mail.git"
+  },
+  "author": "Team Mango",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ananor86/SecuritE-mail/issues"
+  },
+  "homepage": "https://github.com/ananor86/SecuritE-mail#readme"
+}
