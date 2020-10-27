@@ -38,20 +38,51 @@
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
           <!-- name of file that executes all our functions (needs event) -->
-          <FunctionFile resid="" />
+          <FunctionFile resid="handler"/>
           <ExtensionPoint xsi:type="MessageComposeCommandSurface">
             <OfficeTab id="TabDefault">
-            
+              <Group id="msgComposeGroup"/>
+                <Label resid="groupLabel"/>
+                <Control xsi:type="Button" id="msgComposeOpenPaneButton">
+                  <Label resid="taskPaneButtonLabel" />
+                  <Supertip>
+                    <Title resid="taskPaneButtonLabel" />
+                    <Description resid="taskPaneButtonDesc" />
+                  </Supertip>
+                  <Icon>
+                    <!-- needs images for icons (size 16, 32, and 80) sample 16 below -->
+                    <bt:Image size="16" resid="green-icon-16" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="handler" />
+                  </Action>
+                </Control>
+              </Group>
             </OfficeTab>
           </ExtensionPoint>
-
         </DesktopFormFactor>
-
       </Host>
     </Hosts>
     
     <!-- local elements, i.e. name, image etc. -->
     <Resources>
+      <bt:Images>
+        <!-- urls of images for icons put here (sample below) -->
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="handler" DefaultValue="https://localhost:8443/BackEnd/handler.html"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:ShortString id="groupLabel" DefaultValue="SecuritE-mail"/>
+        <bt:ShortString id="taskPaneButtonLabel" DefaultValue="Check E-mail"/>
+      </bt:ShortStrings>
+      
+      <bt:LongStrings>
+        <bt:LongString id="taskPaneButtonDescription" DefaultValue="Checks and scores body of e-mail in how much classified information is within it"/>
+      </bt:LongStrings>
     </Resources>
 
   </VersionOverrides>
