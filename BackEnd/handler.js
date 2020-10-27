@@ -8,7 +8,7 @@
  */
 function interpretEmail(email) {
     //this will change the email into a readable format to process
-    let strEmail = email;
+    let strEmail = email.toUpperCase();
     return strEmail;
 }
 
@@ -41,8 +41,9 @@ function calcuateScore(email, phrases) {
     //for each phrase inside the array
     //find an occurence and update the score
     for(i = 0; i < phrases.length; i++) {
-        let pos = txt.indexOf(phrases[i]);
+        let pos = txt.indexOf(phrases[i].toUpperCase());
         if(pos >= 0) {
+            console.log(phrases[i])
             score++;
         }
     }
@@ -50,7 +51,25 @@ function calcuateScore(email, phrases) {
     return score;
 }
 
+function rating(score) {
+    if (score == 0) {
+        console.log("Risk Level: None");
+    } else if (score == 1) {
+        console.log("Risk Level: Low");
+    } else if (score == 2) {
+        console.log("Risk Level: Medium");
+    } else {
+        console.log("Risk Level: High")
+    }
+    return score;
+}
 
-var phrases = []
-var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missle flight. There is a missle there and a missle here. The Radar range seems to be be off but that is nothing we cannot handle. Therefore, we will no longer meander around and get to work. Ship Capability. Regards, Elon Musk";
-console.log(calcuateScore(emailtst, phrases))
+var phrases = ["Track capacity","Intercept range","Radar range",
+    "Missile type","Missile flight","Missile capability","Radar capability",
+    "Missile inventory","Ship Capability","Missile Range","Missile Capacity","Track Types", "Trackable Object"]
+
+var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missi4le flight."
+        + " There is a missile there and a missile here. The Ra4dar range seems to be be off but that is nothing we cannot handle." 
+        + " Therefore, we will no longer meander around and get to work. Ship Capa4bility. Regards, Elon Musk";
+
+console.log(rating(calcuateScore(emailtst, phrases)))
