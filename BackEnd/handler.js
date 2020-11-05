@@ -68,8 +68,7 @@ var phrases = ["Track capacity","Intercept range","Radar range",
     "Missile type","Missile flight","Missile capability","Radar capability",
     "Missile inventory","Ship Capability","Missile Range","Missile Capacity","Track Types", "Trackable Object"]
 
-var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missi4le flight."
-        + " There is a missile there and a missile here. The Ra4dar range seems to be be off but that is nothing we cannot handle." 
-        + " Therefore, we will no longer meander around and get to work. Ship Capa4bility. Regards, Elon Musk";
-
+var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missile flight."
+        + " There is a missile there and a missile here. The Radar range seems to be be off but that is nothing we cannot handle." 
+        + " Therefore, we will no longer meander around and get to work. Ship Capability. Missile flight. Regards, Elon Musk";
 console.log(rating(calcuateScore(emailtst, phrases)))
