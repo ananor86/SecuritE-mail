@@ -19,7 +19,7 @@ var params = {
 ec2 = new AWS.EC2({
   apiVersion: '2016-11-15'
 });
-ec2.describeInstances(params, function(err, data) {
+ec2.describeInstances(function(err, data) {
   if (err) {
     console.log("Error", err.stack);
   } else {
