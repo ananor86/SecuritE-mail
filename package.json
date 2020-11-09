@@ -8,9 +8,12 @@
     "node-ssh": "^11.1.1",
     "ssh2": "^0.8.9"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "http-server ./public -S -C keys/localhost+2.pem -K keys/localhost+2-key.pem"
   },
   "repository": {
     "type": "git",
