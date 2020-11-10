@@ -1,5 +1,5 @@
 //*** might not need this cause i'm using http-server instead of this ***
-const https = require('https');
+/*const https = require('https');
 const fs = require('fs');
 
 const options = {
@@ -13,5 +13,18 @@ https.createServer(options, function (req, res) {
     res.write(data);
     return res.end();
   });
-}).listen(8000);
+}).listen(8000);*/
+
+const { exec } = require('child_process');
+
+exec("npm run dev", (error, stdout, stderr) => {
+  if (error) {
+    console.log(`error: ${error.message}`);
+  }
+  if(stderr) {
+    console.log(`stderr: ${stderr}`);
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log("Server running on port 8080");
+});
 
