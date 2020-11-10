@@ -130,11 +130,3 @@ var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about t
         setTimeout(() => {console.log(rating(calcuateScore(emailtst, phrases)));}, 3000);
 
 
-<<<<<<< HEAD
-
-=======
-var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missile flight."
-        + " There is a missile there and a missile here. The Radar range seems to be be off but that is nothing we cannot handle." 
-        + " Therefore, we will no longer meander around and get to work. Ship Capability. Missile flight. Regards, Elon Musk";
-console.log(rating(calcuateScore(emailtst, phrases)))
->>>>>>> dca95119b327ec756d3c9743b8288e11013ebc6f
