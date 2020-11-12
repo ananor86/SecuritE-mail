@@ -1,58 +1,5 @@
 //import { connection } from "./connection";
 //import { mysql, connect } from './connection.js'
-const mysql = require('mysql')
-
-//Creates a connection to my local the AWS mySQL database.
-/*
-var connection = mysql.createConnection({
-    host: "localhost",
-    user: "testuser",
-    password: "SecuritE-mail",
-    port: "3306",
-    database: "securite-mail"
-
-});
-*/
-var phrases = [];
-
-function connect() {
-
-    var connection = mysql.createConnection({
-        host: "localhost",
-        user: "testuser",
-        password: "SecuritE-mail",
-        port: "3306",
-        database: "securite-mail"
-    });
-
-
-    let phrases = [];
-    connection.connect(function(err) {
-        if(err) {
-         console.error('Database connection failed: ' + err.stack);
-            return;
-     }
-        console.log('Connected to database.')
-        connection.query("SELECT phrase FROM phrases", function (err, result, fields) {
-         if (err) throw err;
-            for(i = 0; i < result.length; i++) {
-             phrases[i] = result[i].phrase;
-            //console.log("index " + i + " " + phrases[i])
-             }
-         });
-        connection.end(function(err) {
-            if (err) {
-                return console.log('error:' + err.message);
-            }
-            console.log('Close the database connection.');
-        });  
-    });
-
-    return phrases;
-}
-  
-phrases = connect();
-
 
 /**
  * Converts the email into a readable form for
@@ -116,17 +63,12 @@ function rating(score) {
     }
     return score;
 }
-/*
+
 var phrases = ["Track capacity","Intercept range","Radar range",
     "Missile type","Missile flight","Missile capability","Radar capability",
     "Missile inventory","Ship Capability","Missile Range","Missile Capacity","Track Types", "Trackable Object"]
-*/
 
 var emailtst = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missile flight."
         + " There is a missile there and a missile here. The Radar range seems to be be off but that is nothing we cannot handle." 
-        + " Therefore, we will no longer meander around and get to work. Ship Capability. Regards, Elon Musk";
-
-
-        setTimeout(() => {console.log(rating(calcuateScore(emailtst, phrases)));}, 3000);
-
-
+        + " Therefore, we will no longer meander around and get to work. Ship Capability. Missile flight. Regards, Elon Musk";
+console.log(rating(calcuateScore(emailtst, phrases)))

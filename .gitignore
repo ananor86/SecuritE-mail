@@ -44,6 +44,7 @@ bower_components
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.vscode
 
 # misc
 .sass-cache
@@ -61,7 +62,7 @@ yarn-error.log*
 # Dependency directories
 node_modules/
 jspm_packages/
-
+BackEnd/__pycache__
 # Optional npm cache directory
 .npm
 
