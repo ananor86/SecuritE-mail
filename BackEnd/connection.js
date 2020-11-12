@@ -20,10 +20,12 @@ var connection = mysql.createConnection({
     user: "SYSTEM_USER",
     password: "SecuritE-mail",
     port: "3306",
+    database: "phrases"
+    /*
     ssl: {
-      //ca: fs.readFileSync(__dirname + '/EmailScan.pem')
-      rejectUnauthorized: false
+      ca: fs.readFileSync(__dirname + '/EmailScan.pem')
     }
+    */
 });
 
 
@@ -41,8 +43,6 @@ connection.connect(function(err) {
             phrases[i] = result[i].phrase;
           }
       });
-
-      
 
       connection.end(function(err) {
         if (err) {
