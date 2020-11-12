@@ -1,6 +1,7 @@
 const mysql = require('mysql')
+const fs = require("fs")
 
-//Creates a connection to my local the AWS mySQL database.
+//Creates a connection to my local the mySQL database.
 /*
 var connection = mysql.createConnection({
     host: "localhost",
@@ -12,15 +13,19 @@ var connection = mysql.createConnection({
 });
 */
 
+//Creates connection mySQL database on AWS server.
+
 var connection = mysql.createConnection({
     host: "52.91.199.44",
     user: "SYSTEM_USER",
     password: "SecuritE-mail",
     port: "3306",
-    database: "securite-mail",
-    insecureAuth : true
-
+    ssl: {
+      //ca: fs.readFileSync(__dirname + '/EmailScan.pem')
+      rejectUnauthorized: false
+    }
 });
+
 
 var phrases = [];
 //Tests database connection.
@@ -34,7 +39,6 @@ connection.connect(function(err) {
         if (err) throw err;
         for(i = 0; i < result.length; i++) {
             phrases[i] = result[i].phrase;
-            console.table(phrases);
           }
       });
 
@@ -49,5 +53,5 @@ connection.connect(function(err) {
 });
 
 
-
+// setTimeout(() => {console.table(phrases);}, 3000);
  
