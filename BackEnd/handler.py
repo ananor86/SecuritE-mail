@@ -1,11 +1,6 @@
 import os
 import hashlib
 import re
-import pyodbc as db
-from BackEnd import pyConnect
-
-connection = pyConnect.MySQLConnection(host='ec2-52-91-199-44.compute-1.amazonaws.com', user='SYSTEM_USER',
-                                       password='SecuritE-mail', schema='phrases')
 
 
 def toHash(email):
@@ -68,11 +63,11 @@ phrases = ["Track capacity", "Intercept range", "Radar range",
            "Missile inventory", "Ship Capability", "Missile Range", "Missile Capacity", "Track Types",
            "Trackable Object"]
 hashedPhrases = []
-for i in phrases:
-    salt = os.urandom(32)
-    hashedPhrases.append(hashlib(pbkdf2_hmac('sha256'),
-                                 i.encode('utf-8'),
-                                 salt,
+for phrase in phrases:
+    salted = os.urandom(32)
+    hashedPhrases.append(hashlib.pbkdf2_hmac('sha256',
+                                 phrase.encode('utf-8'),
+                                 salted,
                                  10000))
 
 emailtst = ("Good afternoon Professor Chu, We are pleased to tell you about the project involving missile flight."
