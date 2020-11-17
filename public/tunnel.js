@@ -1,12 +1,12 @@
-const tunnel = require('tunnel-ssh');
 const fs = require('fs');
 const mysql = require('mysql');
 const Client = require('ssh2');
-const { SSL_OP_TLS_BLOCK_PADDING_BUG } = require('constants');
 const conn = new Client()
+const { SSL_OP_TLS_BLOCK_PADDING_BUG } = require('constants');
 
 
-var key = fs.readFileSync(__dirname + '/EmailScan.pem', 'utf-8')
+
+var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8')
 var phrases = [];
 
 // console.log(key)
@@ -23,41 +23,39 @@ var connection = mysql.createConnection({
 var config = {
     username:'ubuntu',
     host:'52.91.199.44',
-    dstPort: 22,
+    dstPort: 8080,
     privateKey: key
  };
 
- var command = "Good afternoon Professor Chu, We are pleased to tell you about the project involving missile flight." +
- "There is a missile there and a missile here. The Radar range seems to be be off but that is nothing we " +
- "cannot handle." +
- "Therefore, we will no longer meander around and get to work. Ship Capability. Missile flight. Regards, " +
- "Elon Musk";
 var score = 0;
- conn.on('ready', () => {
+function server(command) {
+    conn.on('ready', () => {
     console.log('Client :: ready');
     conn.exec('python3 backend/handler.py <<< "'+ command + '" ', (err, stream) => {
         if (err) throw err;
-
         stream.on('close', (code, signal) => {
             console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
             conn.end();
-        }).on('data', (data) => {
-            console.log('STDOUT: ' + data);
-            score = parseInt(String.fromCharCode(data[0]))
-            //score = score[0]
-        }).stderr.on('data', (data) => {
-            console.log('STDERR: ' + data);
+            }).on('data', (data) => {
+                console.log('STDOUT: ' + data);
+                score = parseInt(String.fromCharCode(data[0]));
+                //score = score[0]
+            }).stderr.on('data', (data) => {
+                console.log('STDERR: ' + data);
+            });
         });
+
+    }).connect({
+        host: 'ec2-52-91-199-44.compute-1.amazonaws.com',
+        dstPort: 8080,
+        username: 'ubuntu',
+        privateKey: key
     });
 
-}).connect({
-    host: 'ec2-52-91-199-44.compute-1.amazonaws.com',
-    port: 22,
-    username: 'ubuntu',
-    privateKey: key
-});
+    setTimeout(() => { module.exports.score = score; }, 2000);
+}
 
-setTimeout(() => console.log(score), 2000)
+module.exports.server = server;
 
 /*
  var server = tunnel(config, function (error, server) {

@@ -12,6 +12,9 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="SecuritE-mail Demo" />
   <Description DefaultValue="Given body of composing email, checks for sensitive words in database" />
+  <IconUrl DefaultValue="https://127.0.0.1:8080/assets/email-icon-80.png" />
+  <HighResolutionIconUrl DefaultValue="https://127.0.0.1:8080/assets/email-icon.png" />
+  <SupportUrl DefaultValue="https://127.0.0.1:8080/" />
 
   <Requirements>
     <Sets DefaultMinVersion="1.1">
@@ -22,7 +25,7 @@
   <FormSettings>
   <Form xsi:type="ItemEdit">
     <DesktopSettings>
-      <SourceLocation DefaultValue="https://127.0.0.1:8080/index.html" />
+      <SourceLocation DefaultValue="https://127.0.0.1:8080/bodyextractor.html" />
     </DesktopSettings>
   </Form>
   </FormSettings>
@@ -35,7 +38,63 @@
 
   <!-- specifies application, types of controls, text, icons, and any associated functions -->
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
-    <!-- On Send requires VersionOverridesV1_1 -->
+    <Description resid="residAppDescription"/>
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox" />
+      </bt:Sets>
+    </Requirements>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="bodyExtractorFile" />
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgComposeGroup">
+                <Label resid="groupLabel" />
+                <!-- Function (UI-less) button -->
+                <Control xsi:type="Button" id="msgComposeFunctionButton">
+                  <Label resid="funcComposeButtonLabel" />
+                  <Supertip>
+                    <Title resid="funcComposeSuperTipTitle" />
+                    <Description resid="funcComposeSuperTipDescription" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="email-icon-16" />
+                    <bt:Image size="32" resid="email-icon-32" />
+                    <bt:Image size="80" resid="email-icon-80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>getBody</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="email-icon-16" DefaultValue="https://127.0.0.1:8080/assets/email-icon-16.png" />
+        <bt:Image id="email-icon-32" DefaultValue="https://127.0.0.1:8080/assets/email-icon-32.png" />
+        <bt:Image id="email-icon-80" DefaultValue="https://127.0.0.1:8080/assets/email-icon-80.png" />
+      </bt:Images>
+      <bt:Urls>
+          <!-- The JavaScript code is hosted on a secure and trusted web server. -->
+        <bt:Url id="bodyExtractorFile" DefaultValue="https://127.0.0.1:8080/bodyextractor.html" ></bt:Url>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="groupLabel" DefaultValue="SecuritE-mail" />
+        <bt:String id="funcComposeButtonLabel" DefaultValue="Check E-mail Risk Level" />
+        <bt:String id="funcComposeSuperTipTitle" DefaultValue="Checks body of email for sensitive information" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="funcComposeSuperTipDescription" DefaultValue="Checks body of email for sensitive information and displays a riskiness score." />
+      </bt:LongStrings>
+    </Resources>
+
+
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
       <Description resid="residAppDescription" />
       <Requirements>
@@ -48,18 +107,51 @@
           <DesktopFormFactor>
             <!-- The functionfile and function name to call on message send.  -->
             <!-- In this particular case the function validateBody will be called within the JavaScript code referenced in residUILessFunctionFileUrl. -->
-            <FunctionFile resid="residUILessFunctionFileUrl" />
-            <ExtensionPoint xsi:type="Events">
-              <Event Type="ItemSend" FunctionExecution="synchronous" FunctionName="validateBody" />
+            <FunctionFile resid="bodyExtractorFile" />
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="msgComposeGroup">
+                  <Label resid="groupLabel" />
+                  <!-- Function (UI-less) button -->
+                  <Control xsi:type="Button" id="msgComposeFunctionButton">
+                    <Label resid="funcComposeButtonLabel" />
+                    <Supertip>
+                      <Title resid="funcComposeSuperTipTitle" />
+                      <Description resid="funcComposeSuperTipDescription" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="email-icon-16" />
+                      <bt:Image size="32" resid="email-icon-32" />
+                      <bt:Image size="80" resid="email-icon-80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>getBody</FunctionName>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
             </ExtensionPoint>
           </DesktopFormFactor>
         </Host>
       </Hosts>
       <Resources>
+        <bt:Images>
+          <bt:Image id="email-icon-16" DefaultValue="https://127.0.0.1:8080/assets/email-icon-16.png" />
+          <bt:Image id="email-icon-32" DefaultValue="https://127.0.0.1:8080/assets/email-icon-32.png" />
+          <bt:Image id="email-icon-80" DefaultValue="https://127.0.0.1:8080/assets/email-icon-80.png" />
+        </bt:Images>
         <bt:Urls>
-           <!-- The JavaScript code is hosted on a secure and trusted web server. -->
-          <bt:Url id="residUILessFunctionFileUrl" DefaultValue="https://127.0.0.1:8080/index.html" ></bt:Url>
+            <!-- The JavaScript code is hosted on a secure and trusted web server. -->
+          <bt:Url id="bodyExtractorFile" DefaultValue="https://127.0.0.1:8080/bodyextractor.html" ></bt:Url>
         </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="groupLabel" DefaultValue="SecuritE-mail" />
+          <bt:String id="funcComposeButtonLabel" DefaultValue="Check E-mail Risk Level" />
+          <bt:String id="funcComposeSuperTipTitle" DefaultValue="Checks body of email for sensitive information" />
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="funcComposeSuperTipDescription" DefaultValue="Checks body of email for sensitive information and displays a riskiness score." />
+        </bt:LongStrings>
       </Resources>
     </VersionOverrides>
   </VersionOverrides>
