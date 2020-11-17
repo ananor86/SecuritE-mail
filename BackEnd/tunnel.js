@@ -44,7 +44,6 @@ var score = 0;
         }).on('data', (data) => {
             console.log('STDOUT: ' + data);
             score = parseInt(String.fromCharCode(data[0]))
-            //score = score[0]
         }).stderr.on('data', (data) => {
             console.log('STDERR: ' + data);
         });
@@ -58,54 +57,3 @@ var score = 0;
 });
 
 setTimeout(() => console.log(score), 2000)
-
-/*
- var server = tunnel(config, function (error, server) {
-    if(error){
-        console.log("SSH connection error: " + error);
-    }
-    console.log('Connected to server!')
-
-    var spawn = require('child_process');
-    const child = spawn.exec('ls'); 
-        child.stdout.on('data', (data) => { 
-        console.log(`stdout: ${data}`); 
-        }); 
-  
-        child.stderr.on('data', (data) => { 
-            console.error(`stderr: ${data}`); 
-        }); 
-  
-        child.on('close', (code) => { 
-            console.log(`child process exited with code ${code}`); 
-        }); 
-
-
-    /*
-    connection.connect(function(err) {
-        if(err) {
-            console.error('Database connection failed: ' + err.stack);
-            return;
-        }
-        console.log('Connected to database.')
-        connection.query("SELECT phrase FROM phrases", function (err, result, fields) {
-            if (err) throw err;
-            for(i = 0; i < result.length; i++) {
-                phrases[i] = result[i].phrase;
-              }
-          });
-    
-          connection.end(function(err) {
-            if (err) {
-              return console.log('error:' + err.message);
-            }
-            console.log('Close the database connection.');
-          });  
-    });
-
-    server.close();
- });
-
- setTimeout(() => {console.table(phrases);}, 3000);
-
-*/
