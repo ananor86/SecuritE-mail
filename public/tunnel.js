@@ -9,8 +9,6 @@ const { SSL_OP_TLS_BLOCK_PADDING_BUG } = require('constants');
 var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8')
 var phrases = [];
 
-// console.log(key)
-
 var connection = mysql.createConnection({
     host: "ec2-52-91-199-44.compute-1.amazonaws.com",
     user: "SYSTEM_USER",
