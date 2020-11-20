@@ -7,6 +7,7 @@
 	or weight of specific sensitive strings.
 
 ## Members Involved
+
 	- Jehu Ananoria
 	- Marc Colin
 	- Katie Lee
@@ -15,6 +16,7 @@
 	- Nick Tapiero
 
 ## Languages/Systems involved
+
 	- mySQL on AWS
 	- Python
 	- Javascript (NodeJS)
