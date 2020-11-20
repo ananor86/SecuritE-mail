@@ -1,6 +1,4 @@
-const fs = require('fs');
-const Client = require('ssh2');
-const conn = new Client()
+const connect = require('./tunnel');
 
 var mailboxItem;
 
@@ -13,8 +11,8 @@ function getBody(event) {
         function (asyncResult){
           if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
             var score = 0;
-            server(asyncResult.value);
-            setTimeout(() => { score = _score; }, 2000);
+            connect.server(asyncResult.value);
+            setTimeout(() => { score = connect.score; }, 2000);
 
             mailboxItem.notificationMessages.addAsync("bodyCheck", {
                 type: "informationalMessage",
@@ -34,6 +32,10 @@ function getBody(event) {
     );
 }
 
+/*
+const fs = require('fs');
+const Client = require('ssh2');
+const conn = new Client();
 
 var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8')
 
