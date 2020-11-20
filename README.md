@@ -8,17 +8,17 @@
 
 ## Members Involved
 
-	- Jehu Ananoria
-	- Marc Colin
-	- Katie Lee
-	- Taylor Gould
-	- Brett Amberge
-	- Nick Tapiero
+	+ Jehu Ananoria
+	+ Marc Colin
+	+ Katie Lee
+	+ Taylor Gould
+	+ Brett Amberge
+	+ Nick Tapiero
 
 ## Languages/Systems involved
 
-	- mySQL on AWS
-	- Python
-	- Javascript (NodeJS)
+	+ mySQL on AWS
+	+ Python
+	+ Javascript (NodeJS)
 
 
