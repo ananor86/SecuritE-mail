@@ -1,0 +1,2 @@
+This is a test email that will return a score of one, despite a sinle phrase being repeated.
+Radar range, Radar Range, RADAR RANGE, radar range, RaDaR rAnGe.
