@@ -4,21 +4,28 @@
   "description": "e-mail scanner project",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.788.0",
     "browserify": "^17.0.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
     "node-ssh": "^11.1.1",
+    "nodejs": "0.0.0",
     "requirejs": "^2.3.6",
     "ssh2": "^0.8.9",
-    "tunnel-ssh": "^4.1.4"
+    "tunnel-ssh": "^4.1.4",
+    "webpack-cli": "^4.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@webpack-cli/init": "^1.0.3",
+    "babelify": "^10.0.0",
     "http-server": "^0.12.3",
     "office-addin-debugging": "^3.0.38",
-    "office-addin-manifest": "^1.5.10"
+    "office-addin-manifest": "^1.5.10",
+    "webpack": "^5.6.0"
   },
   "scripts": {
+    "build": "browserify public/bodyextractor.js -o bundle.js",
     "debug": "office-addin-debugging start manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
     "dev": "http-server -p 8080 -S -C public/keys/localhost+2.pem -K public/keys/localhost+2-key.pem"
