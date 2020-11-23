@@ -1,4 +1,8 @@
-const connect = require('./tunnel');
+/*import { createRequire } from 'module';
+const require = createRequire(import.meta.url);*/
+
+const connect = require('./tunnel.js');
+//import { server, finalscore } from './tunnel.js';
 
 var mailboxItem;
 
@@ -12,7 +16,7 @@ function getBody(event) {
           if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
             var score = 0;
             connect.server(asyncResult.value);
-            setTimeout(() => { score = connect.score; }, 2000);
+            setTimeout(() => { score = connect.finalscore; }, 2000);
 
             mailboxItem.notificationMessages.addAsync("bodyCheck", {
                 type: "informationalMessage",
