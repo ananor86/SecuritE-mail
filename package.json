@@ -21,11 +21,13 @@
     "@webpack-cli/init": "^1.0.3",
     "babelify": "^10.0.0",
     "http-server": "^0.12.3",
+    "nodemon": "^2.0.6",
     "office-addin-debugging": "^3.0.38",
     "office-addin-manifest": "^1.5.10",
     "webpack": "^5.6.0"
   },
   "scripts": {
+    "start": "nodemon index",
     "build": "browserify public/bodyextractor.js -o bundle.js",
     "debug": "office-addin-debugging start manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",

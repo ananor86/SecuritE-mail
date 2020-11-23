@@ -4,6 +4,7 @@ const require = createRequire(import.meta.url);*/
 
 const fs = require('fs');
 const Client = require('ssh2');
+const { ModuleFilenameHelpers } = require('webpack');
 //import { readFileSync } from 'fs';
 //import { Client } from 'ssh2';
 const conn = new Client();
@@ -11,7 +12,6 @@ const conn = new Client();
 
 var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8');
 
-var finalscore;
 var score = 0;
 function server(command) {
     conn.on('ready', () => {
@@ -36,7 +36,7 @@ function server(command) {
         privateKey: key
     });
 
-    setTimeout(() => { module.exports.finalscore = score; }, 2000);
+    setTimeout(() => { module.exports.score = score; }, 2000);
 }
 
 module.exports.server = server;

@@ -1,7 +1,7 @@
 /*import { createRequire } from 'module';
 const require = createRequire(import.meta.url);*/
 
-const connect = require('./tunnel.js');
+//const connect = require('./tunnel.js');
 //import { server, finalscore } from './tunnel.js';
 
 var mailboxItem;
@@ -10,20 +10,55 @@ Office.initialize = function () {
     mailboxItem = Office.context.mailbox.item;
 }
 
+
+//Office.onReady();
 function getBody(event) {
     mailboxItem.body.getAsync(Office.CoercionType.Text , 
-        function (asyncResult){
+        async function (asyncResult){
           if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
-            var score = 0;
-            connect.server(asyncResult.value);
-            setTimeout(() => { score = connect.finalscore; }, 2000);
-
+            const body = asyncResult.value;
+/*
             mailboxItem.notificationMessages.addAsync("bodyCheck", {
                 type: "informationalMessage",
                 icon: "email-icon-16",
-                message: "Score: \"" + score + "\"",
+                message: "Body: \"" + body + "\"",
                 persistent: false
-              });
+              });*/
+
+            const data = { body };
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            };
+            var finalscore = await fetch('/api', options)
+            .then(function(response) { return response.json() })
+            .then(function(responseJson) { return responseJson.finalscore});
+
+            if (finalscore == 0) {
+                informationalStatus("NONE", "Feel free to send this email!");
+            }
+            else if(finalscore == 1) {
+                informationalStatus("LOW", "This email may contain sensitive information.");
+            }
+            else if(finalscore == 2) {
+                errorStatus("MEDIUM", "Please check over this email to make sure you do not send sensitive information.");
+            }
+            else {
+                errorStatus("HIGH", "This email contains a decent amount of sensitive information. Please reconsider sending this email.");
+            }
+            
+
+/*
+            mailboxItem.notificationMessages.addAsync("bodyCheck", {
+                type: "informationalMessage",
+                icon: "email-icon-16",
+                message: "Score : \"" + finalscore + "\"",
+                persistent: false
+              });*/
+
           }
           else {
             mailboxItem.notificationMessages.addAsync("bodyError", {
@@ -36,39 +71,20 @@ function getBody(event) {
     );
 }
 
-/*
-const fs = require('fs');
-const Client = require('ssh2');
-const conn = new Client();
+function informationalStatus(level, message) {
+    mailboxItem.notificationMessages.addAsync("No to Low Risk", {
+        type: "informationalMessage",
+        icon: "email-icon-16",
+        message: "Risk Level is " + level + ". " + message,
+        persistent: false
+      });
+}
 
-var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8')
-
-var score = 0;
-function server(command) {
-    conn.on('ready', () => {
-    console.log('Client :: ready');
-    conn.exec('python3 backend/handler.py <<< "'+ command + '" ', (err, stream) => {
-        if (err) throw err;
-        stream.on('close', (code, signal) => {
-            console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
-            conn.end();
-            }).on('data', (data) => {
-                console.log('STDOUT: ' + data);
-                score = parseInt(String.fromCharCode(data[0]));
-                //score = score[0]
-            }).stderr.on('data', (data) => {
-                console.log('STDERR: ' + data);
-            });
-        });
-
-    }).connect({
-        host: 'ec2-52-91-199-44.compute-1.amazonaws.com',
-        dstPort: 8080,
-        username: 'ubuntu',
-        privateKey: key
-    });
-
-    setTimeout(() => { module.exports.score = score; }, 2000);
+function errorStatus(level, message) {
+    mailboxItem.notificationMessages.addAsync("Medium to High Risk", {
+        type: "errorMessage",
+        message: "Risk Level is " + level + ". " + message,
+      });
 }
 
 /*
