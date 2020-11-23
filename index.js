@@ -1,4 +1,4 @@
-//const tunnel = require('./public/tunnel');
+const tunnel = require('./public/tunnel');
 //const bodyext = require('./public/bodyextractor');
 
 /*import { createServer } from 'https';
@@ -12,6 +12,11 @@ var app = express();
 var publicPath = path.join(__dirname, 'public');
 
 app.use(express.static(publicPath));
+app.use(express.json());
+app.post('/api', (request, response) => {
+    console.log(request.body)
+  
+});
 
 /*app.get('/', function(req, res) {
   console.log(__dirname);
