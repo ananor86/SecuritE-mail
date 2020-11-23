@@ -1,19 +1,19 @@
 /*import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+const require = createRequire(import.meta.url);*/
 
 
-/*const fs = require('fs');
-const Client = require('ssh2');*/
-import { readFileSync } from 'fs';
-import { Client } from 'ssh2';
+const fs = require('fs');
+const Client = require('ssh2');
+//import { readFileSync } from 'fs';
+//import { Client } from 'ssh2';
 const conn = new Client();
 
 
-var key = readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8');
+var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8');
 
-export var finalscore;
+var finalscore;
 var score = 0;
-export function server(command) {
+function server(command) {
     conn.on('ready', () => {
     console.log('Client :: ready');
     conn.exec('python3 backend/handler.py <<< "'+ command + '" ', (err, stream) => {
@@ -36,5 +36,7 @@ export function server(command) {
         privateKey: key
     });
 
-    setTimeout(() => { finalscore = score; }, 2000);
+    setTimeout(() => { module.exports.finalscore = score; }, 2000);
 }
+
+module.exports.server = server;

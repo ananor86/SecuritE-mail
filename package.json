@@ -9,6 +9,7 @@
     "node-ssh": "^11.1.1",
     "nodejs": "0.0.0",
     "requirejs": "^2.3.6",
+    "socket.io": "^3.0.3",
     "ssh2": "^0.8.9",
     "tunnel-ssh": "^4.1.4",
     "webpack-cli": "^4.2.0"
