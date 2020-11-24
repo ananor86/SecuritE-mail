@@ -17,13 +17,6 @@ function getBody(event) {
         async function (asyncResult){
           if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
             const body = asyncResult.value;
-/*
-            mailboxItem.notificationMessages.addAsync("bodyCheck", {
-                type: "informationalMessage",
-                icon: "email-icon-16",
-                message: "Body: \"" + body + "\"",
-                persistent: false
-              });*/
 
             const data = { body };
             const options = {
@@ -33,9 +26,9 @@ function getBody(event) {
                 },
                 body: JSON.stringify(data)
             };
-            var finalscore = await fetch('/api', options)
-            .then(function(response) { return response.json() })
-            .then(function(responseJson) { return responseJson.finalscore});
+            let response = await fetch('/api', options);
+            let responseJson = await response.json();
+            let finalscore = responseJson.finalscore;
 
             if (finalscore == 0) {
                 informationalStatus("NONE", "Feel free to send this email!");
@@ -46,18 +39,9 @@ function getBody(event) {
             else if(finalscore == 2) {
                 errorStatus("MEDIUM", "Please check over this email to make sure you do not send sensitive information.");
             }
-            else {
+            else if(finalscore > 2) {
                 errorStatus("HIGH", "This email contains a decent amount of sensitive information. Please reconsider sending this email.");
             }
-            
-
-/*
-            mailboxItem.notificationMessages.addAsync("bodyCheck", {
-                type: "informationalMessage",
-                icon: "email-icon-16",
-                message: "Score : \"" + finalscore + "\"",
-                persistent: false
-              });*/
 
           }
           else {
@@ -72,7 +56,7 @@ function getBody(event) {
 }
 
 function informationalStatus(level, message) {
-    mailboxItem.notificationMessages.addAsync("No to Low Risk", {
+    mailboxItem.notificationMessages.replaceAsync("Risk", {
         type: "informationalMessage",
         icon: "email-icon-16",
         message: "Risk Level is " + level + ". " + message,
@@ -81,42 +65,8 @@ function informationalStatus(level, message) {
 }
 
 function errorStatus(level, message) {
-    mailboxItem.notificationMessages.addAsync("Medium to High Risk", {
+    mailboxItem.notificationMessages.replaceAsync("Risk", {
         type: "errorMessage",
         message: "Risk Level is " + level + ". " + message,
       });
 }
-
-/*
-    if (score == 0) {
-        informationalStatus("NONE", "Feel free to send this email!");
-        asyncResult.asyncContext.completed();
-    }
-    else if(score == 1) {
-        informationalStatus("LOW", "This email may contain sensitive information.");
-        asyncResult.asyncContext.completed();
-    }
-    else if(score == 2) {
-        errorStatus("MEDIUM", "Please check over this email to make sure you do not send sensitive information.");
-        asyncResult.asyncContext.completed();
-    }
-    
-    errorStatus("HIGH", "This email contains a decent amount of sensitive information. Please reconsider sending this email.");
-    asyncResult.asyncContext.completed();
-}
-
-function informationalStatus(level, message) {
-    mailbox.notificationMessages.addAsync("No to Low Risk", {
-        type: "informationalMessage",
-        icon: "email-icon-16",
-        message: "Risk Level is " + level + "." + message,
-        persistent: false
-      });
-}
-
-function errorStatus(level, message) {
-    mailbox.notificationMessages.addAsync("Medium to High Risk", {
-        type: "errorMessage",
-        message: "Risk Level is " + level + "." + message,
-      });
-}*/

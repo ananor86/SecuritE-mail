@@ -1,10 +1,4 @@
 const tunnel = require('./public/tunnel.js');
-//const bodyext = require('./public/bodyextractor');
-
-/*import { createServer } from 'https';
-import { readFileSync } from 'fs';
-import express from 'express';
-*/
 const express = require('express');
 const fs = require('fs');
 var path = require('path');

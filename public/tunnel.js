@@ -1,14 +1,6 @@
-/*import { createRequire } from 'module';
-const require = createRequire(import.meta.url);*/
-
-
-const e = require('express');
 const fs = require('fs');
 const Client = require('ssh2');
 const { PassThrough } = require('stream');
-const { ModuleFilenameHelpers } = require('webpack');
-//import { readFileSync } from 'fs';
-//import { Client } from 'ssh2';
 const conn = new Client();
 
 
