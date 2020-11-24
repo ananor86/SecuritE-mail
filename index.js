@@ -1,4 +1,4 @@
-const tunnel = require('./public/tunnel');
+const tunnel = require('./public/tunnel.js');
 //const bodyext = require('./public/bodyextractor');
 
 /*import { createServer } from 'https';
@@ -13,15 +13,20 @@ var publicPath = path.join(__dirname, 'public');
 
 app.use(express.static(publicPath));
 app.use(express.json());
-app.post('/api', (request, response) => {
-    console.log(request.body)
-  
-});
 
-/*app.get('/', function(req, res) {
-  console.log(__dirname);
-  res.sendFile('bodyextractor.js');
-});*/
+var emailBody;
+var score;
+app.post('/api', (request, response) => {
+    emailBody = request.body.body;
+    console.log(request.body.body)
+    tunnel.server(emailBody);
+    //
+    setTimeout(() => { score = tunnel.score }, 4000);
+    setTimeout(() => { console.log(score); }, 4000);
+
+    
+    setTimeout(() => { response.json( { finalscore: score }) }, 4000);
+});
 
 const options = {
   key: fs.readFileSync('public/keys/localhost+2-key.pem'),
@@ -35,6 +40,3 @@ https.listen(port, (err) => {
   if (err) console.log(err);
   console.log(`Server listening on ${port}`);
 });
-
-
-
