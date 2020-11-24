@@ -16,9 +16,10 @@ app.use(express.json());
 
 var emailBody;
 var score;
+
 app.post('/api', (request, response) => {
     emailBody = request.body.body;
-    console.log(request.body.body)
+    console.log(emailBody)
     tunnel.server(emailBody);
     //
     setTimeout(() => { score = tunnel.score }, 4000);
