@@ -1,9 +1,3 @@
-/*import { createRequire } from 'module';
-const require = createRequire(import.meta.url);*/
-
-//const connect = require('./tunnel.js');
-//import { server, finalscore } from './tunnel.js';
-
 var mailboxItem;
 
 Office.initialize = function () {
@@ -11,7 +5,6 @@ Office.initialize = function () {
 }
 
 
-//Office.onReady();
 function getBody(event) {
     mailboxItem.body.getAsync(Office.CoercionType.Text , 
         async function (asyncResult){

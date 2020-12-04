@@ -15,12 +15,11 @@ app.post('/api', (request, response) => {
     emailBody = request.body.body;
     console.log(emailBody)
     tunnel.server(emailBody);
-    //
-    setTimeout(() => { score = tunnel.score }, 4000);
-    setTimeout(() => { console.log(score); }, 4000);
-
     
-    setTimeout(() => { response.json( { finalscore: score }) }, 4000);
+    setTimeout(() => { score = tunnel.score }, 2000);
+    setTimeout(() => { console.log(score); }, 3000);
+
+    setTimeout(() => { response.json( { finalscore: score }) }, 3000);
 });
 
 const options = {

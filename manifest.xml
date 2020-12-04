@@ -10,7 +10,7 @@
   <Version>1.0</Version>
   <ProviderName>SecuritE-mail</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="SecuritE-mail Demo" />
+  <DisplayName DefaultValue="SecuritE-mail" />
   <Description DefaultValue="Given body of composing email, checks for sensitive words in database" />
   <IconUrl DefaultValue="https://127.0.0.1:8080/assets/email-icon-80.png" />
   <HighResolutionIconUrl DefaultValue="https://127.0.0.1:8080/assets/email-icon.png" />
