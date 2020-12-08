@@ -1,8 +1,38 @@
 import os
 import hashlib
 import re
+import pymysql.cursors
 
 
+# Connection is the variable that connects to the database
+# It uses local host because it is hosted on the same
+# server as the database
+# User is the username and password is the associated password
+# database is the name of the database being accessed
+connection = pymysql.connect(host='localhost', user='SYSTEM_USER',
+                                       password='SecuritE-mail', database='phrases', charset="latin1",
+                                       cursorclass=pymysql.cursors.DictCursor, port=3306)
+phrases = []
+# This try block is the execution of the connection
+# It will launch the query and store the results
+# as a list of dictionaries inside result.
+# The key for each dictionary is the row queried for
+# EX: SELECT row FROM database.table
+try:
+	cursor =  connection.cursor()
+	cursor.execute("SELECT phrases FROM phrases.phrases")
+	result = cursor.fetchall()
+	for i in range(0, len(result)):
+		phrases.append(result[i]['phrases'])
+except:
+	print("failure")
+
+
+
+# This is the hashing function
+# It was a stretch goal and there was a basic version experimented with
+# However, if in the future a hashing function were to be implemented
+# There is a ready frame for it here
 def toHash(email):
     """
     This is the hashing function that will change
@@ -11,16 +41,16 @@ def toHash(email):
     :param email: the string version of the email
     :return: hashed version of the email
     """
-    hashed = ""
-    email = re.findall(r"[\w']+", email)  # Ignore whitespace and punctuation
-    for i in email:  # Loop through individual in provided text
-        salt = os.urandom(32)  # Generate a random salt
-        i = hashlib.pbkdf2_hmac(
-            'sha256',  # Hash algorithm to use
-            i.encode('utf-8'),  # Convert pasword to bytes
-            salt,  # Provide the salt
-            100000)  # Number of iterations
-        hashed += i.hex()  # Appends hashed version of word as hex characters
+    hashed = email
+    #email = re.findall(r"[\w']+", email)  # Ignore whitespace and punctuation
+    #for i in email:  # Loop through individual in provided text
+    #    salt = os.urandom(32)  # Generate a random salt
+    #    i = hashlib.pbkdf2_hmac(
+    #        'sha256',  # Hash algorithm to use
+    #        i.encode('utf-8'),  # Convert pasword to bytes
+    #        salt,  # Provide the salt
+    #        100000)  # Number of iterations
+    #    hashed += i.hex()  # Appends hashed version of word as hex characters
     return hashed
 
 
@@ -32,9 +62,14 @@ def calculateScore(email: str, phrases: list):
     :param phrases: list of all the words
     :return: the score (pings) of the email
     """
-    txt = toHash(email)
+	# txt is the email but put into upper case
+	# At the moment toHash does no hashing
+    txt = toHash(email).upper()
     score = 0
 
+	# Finds occurences of each word in the retrieved database
+	# then finds an instance of it inside the email string
+	# does not count repeats
     for i in range(0, len(phrases)):
         pos = txt.find(phrases[i].upper())
         if pos > -1:
@@ -58,23 +93,9 @@ def rating(score):
     return score
 
 
-phrases = ["Track capacity", "Intercept range", "Radar range",
-           "Missile type", "Missile flight", "Missile capability", "Radar capability",
-           "Missile inventory", "Ship Capability", "Missile Range", "Missile Capacity", "Track Types",
-           "Trackable Object"]
+# ======================================================================================================================
+
 hashedPhrases = []
-for phrase in phrases:
-    salted = os.urandom(32)
-    hashedPhrases.append(hashlib.pbkdf2_hmac('sha256',
-                                 phrase.encode('utf-8'),
-                                 salted,
-                                 10000))
 
-emailtst = ("Good afternoon Professor Chu, We are pleased to tell you about the project involving missile flight."
-            "There is a missile there and a missile here. The Radar range seems to be be off but that is nothing we "
-            "cannot handle."
-            "Therefore, we will no longer meander around and get to work. Ship Capability. Missile flight. Regards, "
-            "Elon Musk")
-
-print(hashedPhrases)
-print(rating(calculateScore(emailtst, phrases)))
+tst = input()
+print(calculateScore(tst, phrases))
