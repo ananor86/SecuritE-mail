@@ -7,9 +7,11 @@ const conn = new Client();
 var key = fs.readFileSync(__dirname + '/keys/EmailScan.pem', 'utf-8');
 
 var score = 0;
-/**Creates the connection to the server hosting the database,
+/*Creates the connection to the server hosting the database,
  * and then executes the python script on the server,
  * receives the score from the server.
+ * 
+ * @param command       The body text of the email
  */
 function server(command) {
     var flag = true;
