@@ -1,16 +1,24 @@
+
 var mailboxItem;
 
+//Getting the composing email when button is pressed.
 Office.initialize = function () {
     mailboxItem = Office.context.mailbox.item;
 }
 
+/*
+Function will return the notification message given the body of the email.
+Function is called when pressing the SecuritE-mail button on Outlook.
 
+@param event    Button pressed
+*/
 function getBody(event) {
     mailboxItem.body.getAsync(Office.CoercionType.Text , 
         async function (asyncResult){
           if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
-            const body = asyncResult.value;
+            const body = asyncResult.value;     //Getting the body of the email in text form
 
+            //Fetch method for the POST request in index.js
             const data = { body };
             const options = {
                 method: 'POST',
@@ -23,6 +31,7 @@ function getBody(event) {
             let responseJson = await response.json();
             let finalscore = responseJson.finalscore;
 
+            //Notification messages depending on the scoring of var finalscore
             if (finalscore == 0) {
                 informationalStatus("NONE", "Feel free to send this email!");
             }
@@ -48,6 +57,12 @@ function getBody(event) {
     );
 }
 
+/*
+Function creates/replaces an informational notification message given the Risk Level and Message
+
+@param level    Risk level of the score (0,1)
+@param message  Message of said risk level
+*/
 function informationalStatus(level, message) {
     mailboxItem.notificationMessages.replaceAsync("Risk", {
         type: "informationalMessage",
@@ -57,6 +72,12 @@ function informationalStatus(level, message) {
       });
 }
 
+/*
+Function creates/replaces an error notification message given the Risk Level and Message
+
+@param level    Risk level of the score (2+)
+@param message  Message of said risk level
+*/
 function errorStatus(level, message) {
     mailboxItem.notificationMessages.replaceAsync("Risk", {
         type: "errorMessage",
