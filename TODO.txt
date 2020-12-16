@@ -1,3 +1,8 @@
+This TODO has been depracted and does not represent the current state
+of the project
+
+
+
 BacK End
     Find a way to input an email into the application
     Create a hash function to convert the words into a hash

@@ -31,7 +31,7 @@
     "build": "browserify public/bodyextractor.js -o bundle.js",
     "debug": "office-addin-debugging start manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
-    "dev": "http-server -p 8080 -S -C public/keys/localhost+2.pem -K public/keys/localhost+2-key.pem"
+    "dev": "http-server -p 8080 -S -C public/keys/localhost+1.pem -K public/keys/localhost+1-key.pem"
   },
   "repository": {
     "type": "git",

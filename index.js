@@ -13,6 +13,7 @@ var score;
 
 app.post('/api', (request, response) => {
     emailBody = request.body.body;
+    emailBody = emailBody.replace(/[\r\n]+/gm, "")
     console.log(emailBody)
     tunnel.server(emailBody);
     
@@ -23,8 +24,8 @@ app.post('/api', (request, response) => {
 });
 
 const options = {
-  key: fs.readFileSync('public/keys/localhost+2-key.pem'),
-  cert: fs.readFileSync('public/keys/localhost+2.pem')
+  key: fs.readFileSync('public/keys/localhost+1-key.pem'),
+  cert: fs.readFileSync('public/keys/localhost+1.pem')
 };
 
 const https = require('https').createServer(options, app);
